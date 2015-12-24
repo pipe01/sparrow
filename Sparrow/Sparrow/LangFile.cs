@@ -11,7 +11,7 @@ namespace Sparrow
     {
         private const string LangFileHeader = "Sparrow Language File v0.0.1";
 
-        protected internal Dictionary<string, string> Entries;
+        protected internal Dictionary<string, string> Entries = new Dictionary<string, string>();
 
         public static string[] AvailableLanguages(string dir)
         {
@@ -30,15 +30,15 @@ namespace Sparrow
             return l.ToArray();
         }
 
-        public bool Load(string lang, bool test = false)
+        public bool Load(string file, bool test = false)
         {
-            if (!File.Exists(lang + ".slf")) return false;
+            if (!File.Exists(file)) return false;
 
-            string[] linesTmp = File.ReadAllLines(lang + ".slf");
-            string[] lines = new string[] { };
+            string[] linesTmp = File.ReadAllLines(file);
+            string[] lines;
 
             if (linesTmp[0] == LangFileHeader)
-                linesTmp.CopyTo(lines, 1);
+                lines = linesTmp.Skip(1).ToArray();
             else
                 return false;
 
@@ -49,9 +49,10 @@ namespace Sparrow
                 if (ePos == -1) return false;
 
                 string key = l.Substring(0, ePos);
-                string val = l.Substring(ePos, l.Length - ePos);
+                string val = l.Substring(ePos + 1, l.Length - ePos - 1);
 
-                if (!test) Entries.Add(key, val);
+                if (!test)
+                    Entries.Add(key, val);
             }
 
             return true;

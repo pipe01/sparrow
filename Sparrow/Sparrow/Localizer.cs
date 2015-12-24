@@ -11,10 +11,13 @@ namespace Sparrow
     {
         public bool LocalizeControl(Control ctrl, LangFile lang, bool children = true)
         {
-            string tag = ctrl.Tag.ToString();
-            if (tag.StartsWith("!"))
+            if (ctrl.Tag != null)
             {
-                ctrl.Text = lang.GetValue(tag.Substring(1, tag.Length - 1));
+                string tag = ctrl.Tag.ToString();
+                if (tag.StartsWith("!"))
+                {
+                    ctrl.Text = lang.GetValue(tag.Substring(1, tag.Length - 1));
+                }
             }
 
             if (ctrl.Controls.Count > 0 && children)

@@ -18,11 +18,22 @@ namespace BirdCage
             InitializeComponent();
         }
 
+
+        LangFile langFile = new LangFile();
+        Localizer localizer = new Localizer();
+
         private void button1_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             listBox1.Items.AddRange(LangFile.AvailableLanguages(
                 System.IO.Directory.GetCurrentDirectory() + @"\locale"));
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            langFile.Load(@".\en-GB.slf");
+
+            localizer.LocalizeControl(this, langFile);
         }
     }
 }
