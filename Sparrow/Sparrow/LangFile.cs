@@ -21,7 +21,7 @@ namespace Sparrow
 
             LangFile tester = new LangFile();
 
-            foreach (string item in Directory.EnumerateFiles(dir, "*.lang"))
+            foreach (string item in Directory.EnumerateFiles(dir, "*.slf"))
             {
                 if (tester.Load(item, true))
                     l.Add(Path.GetFileNameWithoutExtension(item));
@@ -32,9 +32,9 @@ namespace Sparrow
 
         public bool Load(string lang, bool test = false)
         {
-            if (!File.Exists(lang + ".lang")) return false;
+            if (!File.Exists(lang + ".slf")) return false;
 
-            string[] linesTmp = File.ReadAllLines(lang + ".lang");
+            string[] linesTmp = File.ReadAllLines(lang + ".slf");
             string[] lines = new string[] { };
 
             if (linesTmp[0] == LangFileHeader)
