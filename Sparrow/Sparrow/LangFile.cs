@@ -7,15 +7,29 @@ using System.IO;
 
 namespace Sparrow
 {
-    class LangFile
+    public class LangFile
     {
         protected internal Dictionary<string, string> Entries;
 
-        public bool Load(string file)
+        public string[] AvailableLanguages(string dir)
         {
-            if (!File.Exists(file)) return false;
+            if (!Directory.Exists(dir)) return null;
 
-            string[] lines = File.ReadAllLines(file);
+            List<string> l = new List<string>();
+
+            foreach (string item in Directory.EnumerateFiles(dir, "*.lang"))
+            {
+                l.Add(Path.GetFileNameWithoutExtension(item));
+            }
+
+            return l.ToArray();
+        }
+
+        public bool Load(string lang)
+        {
+            if (!File.Exists(lang + ".lang")) return false;
+
+            string[] lines = File.ReadAllLines(lang + ".lang");
 
             foreach (string l in lines)
             {
@@ -30,6 +44,14 @@ namespace Sparrow
             }
 
             return true;
+        }
+
+        public string GetValue(string key)
+        {
+            if (Entries.ContainsKey(key))
+                return Entries[key];
+            else
+                return "Error";
         }
     }
 }
