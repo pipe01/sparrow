@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Sparrow;
 
 namespace BirdCage
 {
@@ -15,6 +16,13 @@ namespace BirdCage
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            listBox1.Items.AddRange(LangFile.AvailableLanguages(
+                System.IO.Directory.GetCurrentDirectory() + @"\locale"));
         }
     }
 }
