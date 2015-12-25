@@ -49,7 +49,8 @@ namespace SLFEditor
         {
             languages = LangFile.AvailableLanguages(localesFolder);
             lbLangs.Items.Clear();
-            lbLangs.Items.AddRange(languages);
+            if (languages != null)
+                lbLangs.Items.AddRange(languages);
         }
 
         private void LoadEntries(LangFile lFile)

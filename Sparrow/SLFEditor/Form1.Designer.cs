@@ -109,12 +109,14 @@
             // 
             // listView1
             // 
+            this.listView1.AllowColumnReorder = true;
             this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colKey,
             this.colValue});
+            this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(107, 12);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(291, 290);

@@ -16,5 +16,14 @@ namespace SLFEditor
         {
             InitializeComponent();
         }
+
+        private void txtInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                button1.PerformClick();
+            }
+        }
     }
 }

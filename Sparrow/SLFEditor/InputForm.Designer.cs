@@ -49,6 +49,7 @@
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(259, 20);
             this.txtInput.TabIndex = 1;
+            this.txtInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtInput_KeyUp);
             // 
             // button1
             // 
