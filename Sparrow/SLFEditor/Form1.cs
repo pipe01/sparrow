@@ -39,7 +39,7 @@ namespace SLFEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /folderBrowser.ShowDialog();
+            folderBrowser.ShowDialog();
             localesFolder = folderBrowser.SelectedPath;
 
             LoadLanguages();
