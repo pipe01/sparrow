@@ -12,6 +12,10 @@ namespace Sparrow
         private const string LangFileHeader = "Sparrow Language File v0.0.1";
 
         protected internal Dictionary<string, string> Entries = new Dictionary<string, string>();
+        private string Locale;
+
+        public LangFile() { }
+        public LangFile(string file) { Load(file); }
 
         public static string[] AvailableLanguages(string dir)
         {
@@ -55,6 +59,8 @@ namespace Sparrow
                     Entries.Add(key, val);
             }
 
+            Locale = Path.GetFileNameWithoutExtension(file);
+
             return true;
         }
 
@@ -64,6 +70,48 @@ namespace Sparrow
                 return Entries[key];
             else
                 return "Error";
+        }
+
+        public void DeleteValue(string key)
+        {
+            if (Entries.ContainsKey(key))
+                Entries.Remove(key);
+            else
+                return;
+        }
+
+        public Dictionary<string, string> GetDictionary()
+        {
+            return Entries;
+        }
+
+        /// <summary>
+        /// You shouldn't use this method, it's intended for SLFEditor
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, string value)
+        {
+            Entries[key] = value;
+        }
+
+        /// <summary>
+        /// You shouldn't use this method, it's intended for SLFEditor
+        /// </summary>
+        /// <param name="file"></param>
+        public void Save(string file)
+        {
+            File.Delete(file);
+            StreamWriter writer = File.CreateText(file);
+            writer.WriteLine(LangFileHeader);
+
+            foreach (string item in Entries.Keys)
+            {
+                writer.WriteLine(item + "=" + Entries[item]);
+            }
+
+            writer.Flush();
+            writer.Close();
         }
     }
 }

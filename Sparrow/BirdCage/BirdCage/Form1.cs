@@ -31,9 +31,12 @@ namespace BirdCage
 
         private void button4_Click(object sender, EventArgs e)
         {
-            langFile.Load(@".\en-GB.slf");
-
             localizer.LocalizeControl(this, langFile);
+        }
+
+        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            langFile.Load(@".\locale\" + listBox1.SelectedItem.ToString() + ".slf");
         }
     }
 }

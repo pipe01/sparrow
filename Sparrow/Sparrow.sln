@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow", "Sparrow\Sparrow.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCage", "BirdCage\BirdCage\BirdCage.csproj", "{D83A0565-364A-4D31-BA01-DE58AF1C260B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLFEditor", "SLFEditor\SLFEditor.csproj", "{0522B3B2-EF82-4B9F-9BCC-261C5B1C9A93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D83A0565-364A-4D31-BA01-DE58AF1C260B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D83A0565-364A-4D31-BA01-DE58AF1C260B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D83A0565-364A-4D31-BA01-DE58AF1C260B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0522B3B2-EF82-4B9F-9BCC-261C5B1C9A93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0522B3B2-EF82-4B9F-9BCC-261C5B1C9A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0522B3B2-EF82-4B9F-9BCC-261C5B1C9A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0522B3B2-EF82-4B9F-9BCC-261C5B1C9A93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
