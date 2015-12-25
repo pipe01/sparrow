@@ -95,10 +95,18 @@ namespace SLFEditor
         private void button2_Click(object sender, EventArgs e)
         {
             InputForm input = new InputForm();
-            input.lblDesc.Text = "Enter the entry's key";
+            input.lblDesc.Text = "Enter the entry's key (separate with @ to add multiple)";
             if (input.ShowDialog() == DialogResult.Cancel) return;
 
-            currentLang.SetValue(input.txtInput.Text, "EDIT");
+            string[] keys =
+                input.txtInput.Text.Contains("@") ?
+                input.txtInput.Text.Split('@') : 
+                new string[] { input.txtInput.Text };
+
+            foreach (string item in keys)
+            {
+                currentLang.SetValue(item, "EDIT");
+            }
             LoadEntries(currentLang);
 
             currentLang.Save(localesFolder + "\\" + lbLangs.SelectedItem.ToString() + ".slf");
