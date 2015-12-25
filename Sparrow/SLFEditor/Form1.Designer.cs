@@ -43,6 +43,8 @@
             // 
             // lbLangs
             // 
+            this.lbLangs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lbLangs.FormattingEnabled = true;
             this.lbLangs.Location = new System.Drawing.Point(12, 12);
             this.lbLangs.Name = "lbLangs";
@@ -52,6 +54,7 @@
             // 
             // btnCreateLan
             // 
+            this.btnCreateLan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateLan.Location = new System.Drawing.Point(12, 308);
             this.btnCreateLan.Name = "btnCreateLan";
             this.btnCreateLan.Size = new System.Drawing.Size(89, 35);
@@ -62,6 +65,7 @@
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Location = new System.Drawing.Point(323, 308);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 35);
@@ -72,6 +76,7 @@
             // 
             // button3
             // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Location = new System.Drawing.Point(242, 308);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 35);
@@ -82,6 +87,7 @@
             // 
             // button4
             // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Location = new System.Drawing.Point(286, 349);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(112, 30);
@@ -92,6 +98,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.Location = new System.Drawing.Point(12, 349);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(89, 30);
@@ -102,6 +109,9 @@
             // 
             // listView1
             // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colKey,
             this.colValue});
@@ -116,7 +126,7 @@
             // colKey
             // 
             this.colKey.Text = "Key";
-            this.colKey.Width = 85;
+            this.colKey.Width = 128;
             // 
             // colValue
             // 
@@ -125,6 +135,7 @@
             // 
             // button5
             // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.Location = new System.Drawing.Point(161, 308);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 35);
@@ -147,7 +158,7 @@
             this.Controls.Add(this.btnCreateLan);
             this.Controls.Add(this.lbLangs);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Sparrow Language File Editor";
             this.ResumeLayout(false);
 
         }

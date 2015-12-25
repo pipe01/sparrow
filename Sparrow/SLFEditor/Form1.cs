@@ -39,9 +39,8 @@ namespace SLFEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*folderBrowser.ShowDialog();
-            localesFolder = folderBrowser.SelectedPath;*/
-            localesFolder = @"F:\GitHub Reps\sparrow\Sparrow\SLFEditor\bin\Debug\sdalocales";
+            /folderBrowser.ShowDialog();
+            localesFolder = folderBrowser.SelectedPath;
 
             LoadLanguages();
         }
