@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbLangs = new System.Windows.Forms.ListBox();
             this.btnCreateLan = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -39,6 +40,10 @@
             this.colKey = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button5 = new System.Windows.Forms.Button();
+            this.cmsTranslate = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.button6 = new System.Windows.Forms.Button();
+            this.googleTranslateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsTranslate.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbLangs
@@ -66,7 +71,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(323, 308);
+            this.button2.Location = new System.Drawing.Point(548, 308);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 35);
             this.button2.TabIndex = 5;
@@ -77,7 +82,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(242, 308);
+            this.button3.Location = new System.Drawing.Point(467, 308);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 35);
             this.button3.TabIndex = 6;
@@ -88,9 +93,9 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(286, 349);
+            this.button4.Location = new System.Drawing.Point(107, 308);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(112, 30);
+            this.button4.Size = new System.Drawing.Size(75, 35);
             this.button4.TabIndex = 7;
             this.button4.Text = "Create from template";
             this.button4.UseVisualStyleBackColor = true;
@@ -119,7 +124,7 @@
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(107, 12);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(291, 290);
+            this.listView1.Size = new System.Drawing.Size(516, 290);
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -139,7 +144,7 @@
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(161, 308);
+            this.button5.Location = new System.Drawing.Point(386, 308);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 35);
             this.button5.TabIndex = 10;
@@ -147,11 +152,36 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // cmsTranslate
+            // 
+            this.cmsTranslate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.googleTranslateToolStripMenuItem});
+            this.cmsTranslate.Name = "cmsTranslate";
+            this.cmsTranslate.Size = new System.Drawing.Size(164, 48);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(305, 308);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 35);
+            this.button6.TabIndex = 12;
+            this.button6.Text = "Translate";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button6_MouseClick);
+            // 
+            // googleTranslateToolStripMenuItem
+            // 
+            this.googleTranslateToolStripMenuItem.Name = "googleTranslateToolStripMenuItem";
+            this.googleTranslateToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.googleTranslateToolStripMenuItem.Text = "Google Translate";
+            this.googleTranslateToolStripMenuItem.Click += new System.EventHandler(this.googleTranslateToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 391);
+            this.ClientSize = new System.Drawing.Size(635, 391);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button1);
@@ -162,6 +192,8 @@
             this.Controls.Add(this.lbLangs);
             this.Name = "Form1";
             this.Text = "Sparrow Language File Editor";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.cmsTranslate.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -178,6 +210,9 @@
         private System.Windows.Forms.ColumnHeader colKey;
         private System.Windows.Forms.ColumnHeader colValue;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ContextMenuStrip cmsTranslate;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ToolStripMenuItem googleTranslateToolStripMenuItem;
     }
 }
 

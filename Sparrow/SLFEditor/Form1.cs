@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -149,6 +150,33 @@ namespace SLFEditor
             {
                 button5_Click(sender, e);
             }
+        }
+
+        public string TranslateText(string input, string languagePair)
+        {
+            string url = String.Format("http://www.google.com/translate_t?hl=en&ie=UTF8&text={0}&langpair={1}", input, languagePair);
+            WebClient webClient = new WebClient();
+            webClient.Encoding = System.Text.Encoding.UTF8;
+            string result = webClient.DownloadString(url);
+            result = result.Substring(result.IndexOf("<span title=\"") + "<span title=\"".Length);
+            result = result.Substring(result.IndexOf(">") + 1);
+            result = result.Substring(0, result.IndexOf("</span>"));
+            return result.Trim();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_MouseClick(object sender, MouseEventArgs e)
+        {
+            cmsTranslate.Show(button6, e.Location);
+        }
+
+        private void googleTranslateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
