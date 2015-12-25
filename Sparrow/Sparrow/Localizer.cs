@@ -9,7 +9,8 @@ namespace Sparrow
 {
     public class Localizer
     {
-        public bool LocalizeControl(Control ctrl, LangFile lang, bool children = true)
+        public bool LocalizeControl<T>(T ctrl, LangFile lang, bool children = true)
+            where T : Control
         {
             if (ctrl.Tag != null)
             {
@@ -25,6 +26,32 @@ namespace Sparrow
                 foreach (Control c in ctrl.Controls)
                 {
                     LocalizeControl(c, lang, true);
+                }
+            }
+
+            if (ctrl is ToolStrip)
+            {
+                ToolStrip ts = ctrl as ToolStrip;
+                foreach (ToolStripItem item in ts.Items)
+                {
+                    dynamic f = (dynamic)item;
+                    LocalizeControl(f, lang, true);
+                }
+            }
+
+            if (ctrl is ToolStripMenuItem)
+            {
+                ToolStripMenuItem tsi = ctrl as ToolStripMenuItem;
+                foreach (ToolStripItem item in tsi.DropDownItems)
+                {
+                    if (item.Tag != null)
+                    {
+                        string tag = item.Tag.ToString();
+                        if (tag.StartsWith("!"))
+                        {
+                            item.Text = lang.GetValue(tag.Substring(1, tag.Length - 1));
+                        }
+                    }
                 }
             }
 
