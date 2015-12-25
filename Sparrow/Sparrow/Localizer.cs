@@ -29,27 +29,20 @@ namespace Sparrow
                 }
             }
 
-            if (ctrl is ToolStrip)
+            if (ctrl is MenuStrip)
             {
                 ToolStrip ts = ctrl as ToolStrip;
-                foreach (ToolStripItem item in ts.Items)
+                foreach (ToolStripMenuItem item in ts.Items)
                 {
-                    dynamic f = (dynamic)item;
-                    LocalizeControl(f, lang, true);
-                }
-            }
-
-            if (ctrl is ToolStripMenuItem)
-            {
-                ToolStripMenuItem tsi = ctrl as ToolStripMenuItem;
-                foreach (ToolStripItem item in tsi.DropDownItems)
-                {
-                    if (item.Tag != null)
+                    foreach (ToolStripMenuItem tsi in item.DropDownItems)
                     {
-                        string tag = item.Tag.ToString();
-                        if (tag.StartsWith("!"))
+                        if (item.Tag != null)
                         {
-                            item.Text = lang.GetValue(tag.Substring(1, tag.Length - 1));
+                            string tag = item.Tag.ToString();
+                            if (tag.StartsWith("!"))
+                            {
+                                item.Text = lang.GetValue(tag.Substring(1, tag.Length - 1));
+                            }
                         }
                     }
                 }
