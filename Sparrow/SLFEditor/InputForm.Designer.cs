@@ -36,12 +36,12 @@
             // 
             // lblDesc
             // 
-            this.lblDesc.AutoSize = true;
-            this.lblDesc.Location = new System.Drawing.Point(22, 18);
+            this.lblDesc.Location = new System.Drawing.Point(9, 9);
             this.lblDesc.Name = "lblDesc";
-            this.lblDesc.Size = new System.Drawing.Size(35, 13);
+            this.lblDesc.Size = new System.Drawing.Size(262, 39);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "label1";
+            this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtInput
             // 

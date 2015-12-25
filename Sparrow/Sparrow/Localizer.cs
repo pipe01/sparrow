@@ -31,24 +31,69 @@ namespace Sparrow
 
             if (ctrl is MenuStrip)
             {
-                ToolStrip ts = ctrl as ToolStrip;
-                foreach (ToolStripMenuItem item in ts.Items)
+                LocalizeMenuStrip(ctrl as MenuStrip, lang);
+            }
+
+            return true;
+        }
+
+        private void LocalizeMenuStrip(MenuStrip s, LangFile lang)
+        {
+            List<ToolStripItem> allItems = new List<ToolStripItem>();
+            foreach (ToolStripItem toolItem in s.Items)
+            {
+                allItems.Add(toolItem);
+                //add sub items
+                allItems.AddRange(GetItems(toolItem));
+            }
+
+            foreach (ToolStripItem item in allItems)
+            {
+                if (item is ToolStripMenuItem)
                 {
-                    foreach (ToolStripMenuItem tsi in item.DropDownItems)
+                    ToolStripMenuItem tsmi = (item as ToolStripMenuItem);
+                    if (tsmi.Tag != null)
                     {
-                        if (item.Tag != null)
+                        string tag = tsmi.Tag.ToString();
+                        if (tag.StartsWith("!"))
                         {
-                            string tag = item.Tag.ToString();
-                            if (tag.StartsWith("!"))
-                            {
-                                item.Text = lang.GetValue(tag.Substring(1, tag.Length - 1));
-                            }
+                            tsmi.Text = lang.GetValue(tag.Substring(1, tag.Length - 1));
                         }
                     }
                 }
             }
+        }
 
-            return true;
+        /// <summary>
+        /// Recursively get SubMenu Items. Includes Separators.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private IEnumerable<ToolStripItem> GetItems(ToolStripItem item)
+        {
+            if (item is ToolStripMenuItem)
+            {
+                foreach (ToolStripItem tsi in (item as ToolStripMenuItem).DropDownItems)
+                {
+                    if (tsi is ToolStripMenuItem)
+                    {
+                        if ((tsi as ToolStripMenuItem).HasDropDownItems)
+                        {
+                            foreach (ToolStripItem subItem in GetItems((tsi as ToolStripMenuItem)))
+                                yield return subItem;
+                        }
+                        yield return (tsi as ToolStripMenuItem);
+                    }
+                    else if (tsi is ToolStripSeparator)
+                    {
+                        yield return (tsi as ToolStripSeparator);
+                    }
+                }
+            }
+            else if (item is ToolStripSeparator)
+            {
+                yield return (item as ToolStripSeparator);
+            }
         }
     }
 }
