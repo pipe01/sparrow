@@ -157,10 +157,11 @@
             this.cmsTranslate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.googleTranslateToolStripMenuItem});
             this.cmsTranslate.Name = "cmsTranslate";
-            this.cmsTranslate.Size = new System.Drawing.Size(164, 48);
+            this.cmsTranslate.Size = new System.Drawing.Size(164, 26);
             // 
             // button6
             // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Location = new System.Drawing.Point(305, 308);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 35);

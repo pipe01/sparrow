@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
+using System.Web;
 
 namespace SLFEditor
 {
@@ -152,16 +156,68 @@ namespace SLFEditor
             }
         }
 
-        public string TranslateText(string input, string languagePair)
+        /// <summary>
+        /// Translates a string into another language using Google's translate API JSON calls.
+        /// <seealso>Class TranslationServices</seealso>
+        /// </summary>
+        /// <param name="Text">Text to translate. Should be a single word or sentence.</param>
+        /// <param name="FromCulture">
+        /// Two letter culture (en of en-us, fr of fr-ca, de of de-ch)
+        /// </param>
+        /// <param name="ToCulture">
+        /// Two letter culture (as for FromCulture)
+        /// </param>
+        public string TranslateGoogle(string text, string fromCulture, string toCulture)
         {
-            string url = String.Format("http://www.google.com/translate_t?hl=en&ie=UTF8&text={0}&langpair={1}", input, languagePair);
-            WebClient webClient = new WebClient();
-            webClient.Encoding = System.Text.Encoding.UTF8;
-            string result = webClient.DownloadString(url);
-            result = result.Substring(result.IndexOf("<span title=\"") + "<span title=\"".Length);
-            result = result.Substring(result.IndexOf(">") + 1);
-            result = result.Substring(0, result.IndexOf("</span>"));
-            return result.Trim();
+            fromCulture = fromCulture.ToLower();
+            toCulture = toCulture.ToLower();
+
+            // normalize the culture in case something like en-us was passed 
+            // retrieve only en since Google doesn't support sub-locales
+            string[] tokens = fromCulture.Split('-');
+            if (tokens.Length > 1)
+                fromCulture = tokens[0];
+
+            // normalize ToCulture
+            tokens = toCulture.Split('-');
+            if (tokens.Length > 1)
+                toCulture = tokens[0];
+
+            string url = string.Format(@"http://translate.google.com/translate_a/t?client=j&text={0}&hl=en&sl={1}&tl={2}",
+                                       HttpUtility.UrlEncode(text), fromCulture, toCulture);
+
+            // Retrieve Translation with HTTP GET call
+            string html = null;
+            try
+            {
+                WebClient web = new WebClient();
+
+                // MUST add a known browser user agent or else response encoding doen't return UTF-8 (WTF Google?)
+                web.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0");
+                web.Headers.Add(HttpRequestHeader.AcceptCharset, "UTF-8");
+
+                // Make sure we have response encoding to UTF-8
+                web.Encoding = Encoding.UTF8;
+                html = web.DownloadString(url);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            // Extract out trans":"...[Extracted]...","from the JSON string
+            string result = Regex.Match(html, "trans\":(\".*?\"),\"", RegexOptions.IgnoreCase).Groups[1].Value;
+
+            if (string.IsNullOrEmpty(result))
+            {
+                return null;
+            }
+
+            //return WebUtils.DecodeJsString(result);
+
+            // Result is a JavaScript string so we need to deserialize it properly
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            return ser.Deserialize(result, typeof(string)) as string;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -176,7 +232,26 @@ namespace SLFEditor
 
         private void googleTranslateToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listView1.SelectedItems.Count == 0) return;
 
+            InputForm input = new InputForm();
+            input.lblDesc.Text = "Enter the language pair. For example, to translate from english to spanish type 'en|es'";
+            if (input.ShowDialog() == DialogResult.Cancel ||
+                input.txtInput.Text == "" || !input.txtInput.Text.Contains("|")) return;
+
+            string[] langs = input.txtInput.Text.Split('|');
+
+            foreach (ListViewItem item in listView1.SelectedItems)
+            {
+                string trans = TranslateGoogle(item.SubItems[1].Text, langs[0], langs[1]);
+                item.SubItems[1].Text = trans;
+                currentLang.SetValue(item.Text, trans);
+            }
+
+            if (MessageBox.Show("Apply?", "Translation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                currentLang.Save(localesFolder + @"\" + input.txtInput.Text + ".slf");
+            }
         }
     }
 }
